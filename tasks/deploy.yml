@@ -1,0 +1,21 @@
+- name: Ensure the default Apache port is 8080
+  ansible.builtin.lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^Listen '
+    insertafter: '^#Listen '
+    line: Listen 8080
+
+- include_vars: test.yml 
+
+- name: copy developer page
+  copy:
+     src: code/ 
+     dest: "{{ webroot }}"
+
+
+- name: deploy  jinja2 files
+  template:
+        src: apache.conf.j2
+        dest: "{{ webconf }}"
+  notify: httpd
+

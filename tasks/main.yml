@@ -1,0 +1,20 @@
+---
+# tasks file for apache
+#
+- name:  install httpd 
+  yum:
+     name: "{{ websvc }}"
+     state: installed
+
+
+- name: start httpd
+  service:
+       name: "{{ websvc }}"
+       state: started
+       enabled: true
+
+
+- import_tasks:  firewall.yml
+
+
+- import_tasks: deploy.yml

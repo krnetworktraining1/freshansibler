@@ -1,0 +1,17 @@
+- name: install firewalld
+  yum:
+    name: "{{ fw }}"
+    state: installed
+
+
+- name: start fw
+  service:
+    name: "{{ fw }}"
+    state: started
+
+- name: do not permit traffic in default zone on port 8081/tcp
+  ansible.posix.firewalld:
+    port: "{{ port }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: true 

@@ -1,0 +1,5 @@
+---
+# vars file for apache
+websvc: httpd
+webconf: /etc/httpd/conf.d/web.conf
+fw: firewalld
